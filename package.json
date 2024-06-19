@@ -1,0 +1,20 @@
+{
+  "name": "my-weather-app",
+  "version": "1.0.0",
+  "description": "A simple weather application",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.2",
+    "body-parser": "^1.20.2",
+    "express": "^4.19.2",
+    "loadash": "^1.0.0",
+    "mongodb": "^6.7.0",
+    "mongoose": "^8.4.1",
+    "readline": "latest"
+  }
+}
