@@ -1,6 +1,9 @@
 const express = require('express');
 const app = express();
-const db = require('./db');  
+const db = require('./db');   
+ 
+require('dotenv').config();
+const PORT = process.env.PORT || 3000;
 
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
@@ -13,6 +16,7 @@ const MenuItem = require('./models/MenuItem');
 const Person = require('./models/Person') ;
 
 /*******************************************************PERSON DETAILS*******************************************************************/
+/*
 app.post('/person', async (req, res) => 
   {
   try {
@@ -43,40 +47,6 @@ app.get('/person', async (req, res) =>
   }
 });
 
-//hello
-
-/*******************************************************MENU ITEMS*************************************************************************/
-app.post('/menu', async (req, res) => 
-  {
-  try {
-    const data = req.body;
-    console.log('Received data:', data);
-    const newMenu = new MenuItem(data);
-    const response = await newMenu.save();
-    console.log('Saved data:', response);  
-    res.status(200).json(response);
-  } 
-  catch (err) {
-    console.log('Error:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
-
-
-app.get('/menu', async (req, res) => 
-{
-  try {
-    const data = await MenuItem.find();
-    console.log('Fetched data:', data);  
-    res.status(200).json(data);
-  } 
-  catch (err) {
-    console.log('Error:', err);
-    res.status(500).json({ error: 'Internal Server Error' });
-  }
-});
- 
-/*******************************************PRINTING OUTPUT IN WORKTYPE FOR PERSON***************************************************** */
 app.get('/person/:workType', async (req, res) => 
 {
   try {
@@ -98,11 +68,37 @@ app.get('/person/:workType', async (req, res) =>
     return res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+*/
+/************************************************************MENU ITEMS******************************************************************* */
+/*
+app.post('/menu', async (req, res) => 
+  {
+  try {
+    const data = req.body;
+    console.log('Received data:', data);
+    const newMenu = new MenuItem(data);
+    const response = await newMenu.save();
+    console.log('Saved data:', response);  
+    res.status(200).json(response);
+  } 
+  catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 
-const personRoutes = require('./routes/personRoutes');
-app.use('/person',personRoutes);  
-/***************************************************************PRINTING MENU ITEMS*********************************************************** */
-//hello
+app.get('/menu', async (req, res) => 
+{
+  try {
+    const data = await MenuItem.find();
+    console.log('Fetched data:', data);  
+    res.status(200).json(data);
+  } 
+  catch (err) {
+    console.log('Error:', err);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+});
 app.get('/person/:Tastes', async (req, res) => 
   {
     try {
@@ -124,16 +120,20 @@ app.get('/person/:Tastes', async (req, res) =>
       return res.status(500).json({ error: 'Internal Server Error' });
     }
   });
-
+*/
+/********************************************************************************** ***************************************************/
 
 const menuRoutes = require('./routes/menuRoutes');
 app.use('/menu',menuRoutes);  
 
 
+const personRoutes = require('./routes/personRoutes');
+app.use('/person',personRoutes);  
+
+
 app.use((req, res, next) => {
   res.status(404).json({ error: 'Not Found' });
 });
-
 
 app.listen(3000, () => 
 {
